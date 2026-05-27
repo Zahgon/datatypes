@@ -13,87 +13,57 @@ import (
 type UUID uuid.UUID
 
 // NewUUIDv1 generates a UUID version 1, panics on generation failure.
-func NewUUIDv1() UUID {
-	return UUID(uuid.Must(uuid.NewUUID()))
-}
+func NewUUIDv1() UUID { _ = "STUB: not implemented"; return *new(UUID) }
 
 // NewUUIDv4 generates a UUID version 4, panics on generation failure.
-func NewUUIDv4() UUID {
-	return UUID(uuid.Must(uuid.NewRandom()))
-}
+func NewUUIDv4() UUID { _ = "STUB: not implemented"; return *new(UUID) }
 
 // NewUUIDv7 generates a UUID version 7, panics on generation failure.
-func NewUUIDv7() UUID {
-	return UUID(uuid.Must(uuid.NewV7()))
-}
+func NewUUIDv7() UUID { _ = "STUB: not implemented"; return *new(UUID) }
 
 // GormDataType gorm common data type.
 func (UUID) GormDataType() string {
-	return "string"
+	_ = "STUB: not implemented"
+
+	// GormDBDataType gorm db data type.
+	return ""
 }
 
-// GormDBDataType gorm db data type.
 func (UUID) GormDBDataType(db *gorm.DB, field *schema.Field) string {
-	switch db.Dialector.Name() {
-	case "mysql":
-		return "LONGTEXT"
-	case "postgres":
-		return "UUID"
-	case "sqlserver":
-		return "NVARCHAR(128)"
-	case "sqlite":
-		return "TEXT"
-	default:
-		return ""
-	}
+	_ = "STUB: not implemented"
+	return ""
 }
 
 // Scan is the scanner function for this datatype.
-func (u *UUID) Scan(value interface{}) error {
-	var result uuid.UUID
-	if err := result.Scan(value); err != nil {
-		return err
-	}
-	*u = UUID(result)
-	return nil
-}
+func (u *UUID) Scan(value interface{}) error { _ = "STUB: not implemented"; return nil }
 
 // Value is the valuer function for this datatype.
 func (u UUID) Value() (driver.Value, error) {
-	return uuid.UUID(u).Value()
+	_ = "STUB: not implemented"
+	return *new(driver.Value), nil
 }
 
 // String returns the string form of the UUID.
-func (u UUID) String() string {
-	return uuid.UUID(u).String()
-}
+func (u UUID) String() string { _ = "STUB: not implemented"; return "" }
 
 // Equals returns true if string form of UUID matches other, false otherwise.
-func (u UUID) Equals(other UUID) bool {
-	return u.String() == other.String()
-}
+func (u UUID) Equals(other UUID) bool { _ = "STUB: not implemented"; return false }
 
 // Length returns the number of characters in string form of UUID.
-func (u UUID) Length() int {
-	return len(u.String())
-}
+func (u UUID) Length() int { _ = "STUB: not implemented"; return 0 }
 
 // IsNil returns true if the UUID is a nil UUID (all zeroes), false otherwise.
-func (u UUID) IsNil() bool {
-	return uuid.UUID(u) == uuid.Nil
-}
+func (u UUID) IsNil() bool { _ = "STUB: not implemented"; return false }
 
 // IsEmpty returns true if UUID is nil UUID or of zero length, false otherwise.
-func (u UUID) IsEmpty() bool {
-	return u.IsNil() || u.Length() == 0
-}
+func (u UUID) IsEmpty() bool { _ = "STUB: not implemented"; return false }
 
 // IsNilPtr returns true if caller UUID ptr is nil, false otherwise.
 func (u *UUID) IsNilPtr() bool {
-	return u == nil
+	_ = "STUB: not implemented"
+
+	// IsEmptyPtr returns true if caller UUID ptr is nil or it's value is empty.
+	return false
 }
 
-// IsEmptyPtr returns true if caller UUID ptr is nil or it's value is empty.
-func (u *UUID) IsEmptyPtr() bool {
-	return u.IsNilPtr() || u.IsEmpty()
-}
+func (u *UUID) IsEmptyPtr() bool { _ = "STUB: not implemented"; return false }

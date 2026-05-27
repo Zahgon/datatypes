@@ -2,11 +2,7 @@ package datatypes
 
 import (
 	"database/sql/driver"
-	"encoding/json"
-	"errors"
-	"fmt"
 	"net/url"
-	"strings"
 
 	"gorm.io/gorm"
 	"gorm.io/gorm/schema"
@@ -15,52 +11,25 @@ import (
 type URL url.URL
 
 func (u URL) Value() (driver.Value, error) {
-	return u.String(), nil
+	_ = "STUB: not implemented"
+	return *new(driver.Value), nil
 }
 
-func (u *URL) Scan(value interface{}) error {
-	var us string
-	switch v := value.(type) {
-	case []byte:
-		us = string(v)
-	case string:
-		us = v
-	default:
-		return errors.New(fmt.Sprint("Failed to parse URL:", value))
-	}
-	uu, err := url.Parse(us)
-	if err != nil {
-		return err
-	}
-	*u = URL(*uu)
-	return nil
-}
+func (u *URL) Scan(value interface{}) error { _ = "STUB: not implemented"; return nil }
 
-func (URL) GormDataType() string {
-	return "url"
-}
+func (URL) GormDataType() string { _ = "STUB: not implemented"; return "" }
 
 func (URL) GormDBDataType(db *gorm.DB, field *schema.Field) string {
-	return "TEXT"
+	_ = "STUB: not implemented"
+	return ""
 }
 
-func (u *URL) String() string {
-	return (*url.URL)(u).String()
-}
+func (u *URL) String() string { _ = "STUB: not implemented"; return "" }
 
-func (u URL) MarshalJSON() ([]byte, error) {
-	return json.Marshal(u.String())
-}
+func (u URL) MarshalJSON() ([]byte, error) { _ = "STUB: not implemented"; return nil, nil }
 
 func (u *URL) UnmarshalJSON(data []byte) error {
+	_ = "STUB: not implemented"
 	// ignore null
-	if string(data) == "null" {
-		return nil
-	}
-	uu, err := url.Parse(strings.Trim(string(data), `"'`))
-	if err != nil {
-		return err
-	}
-	*u = URL(*uu)
 	return nil
 }

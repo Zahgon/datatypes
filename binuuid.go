@@ -1,9 +1,7 @@
 package datatypes
 
 import (
-	"bytes"
 	"database/sql/driver"
-	"errors"
 
 	"github.com/google/uuid"
 	"gorm.io/gorm"
@@ -16,110 +14,67 @@ import (
 type BinUUID uuid.UUID
 
 // NewBinUUIDv1 generates a uuid version 1, panics on generation failure.
-func NewBinUUIDv1() BinUUID {
-	return BinUUID(uuid.Must(uuid.NewUUID()))
-}
+func NewBinUUIDv1() BinUUID { _ = "STUB: not implemented"; return *new(BinUUID) }
 
 // NewBinUUIDv4 generates a uuid version 4, panics on generation failure.
-func NewBinUUIDv4() BinUUID {
-	return BinUUID(uuid.Must(uuid.NewRandom()))
-}
+func NewBinUUIDv4() BinUUID { _ = "STUB: not implemented"; return *new(BinUUID) }
 
 // NewNilBinUUID generates a nil uuid.
 func NewNilBinUUID() BinUUID {
-	return BinUUID(uuid.Nil)
+	_ = "STUB: not implemented"
+	return *
+
+	// BinUUIDFromString returns the BinUUID representation of the specified uuidStr.
+	new(BinUUID)
 }
 
-// BinUUIDFromString returns the BinUUID representation of the specified uuidStr.
-func BinUUIDFromString(uuidStr string) BinUUID {
-	return BinUUID(uuid.MustParse(uuidStr))
-}
+func BinUUIDFromString(uuidStr string) BinUUID { _ = "STUB: not implemented"; return *new(BinUUID) }
 
 // GormDataType gorm common data type.
-func (BinUUID) GormDataType() string {
-	return "BINARY(16)"
-}
+func (BinUUID) GormDataType() string { _ = "STUB: not implemented"; return "" }
 
 // GormDBDataType gorm db data type.
 func (BinUUID) GormDBDataType(db *gorm.DB, field *schema.Field) string {
-	switch db.Dialector.Name() {
-	case "mysql":
-		return "BINARY(16)"
-	case "postgres":
-		return "BYTEA"
-	case "sqlserver":
-		return "BINARY(16)"
-	case "sqlite":
-		return "BLOB"
-	default:
-		return ""
-	}
+	_ = "STUB: not implemented"
+	return ""
 }
 
 // Scan is the scanner function for this datatype.
-func (u *BinUUID) Scan(value interface{}) error {
-	valueBytes, ok := value.([]byte)
-	if !ok {
-		return errors.New("unable to convert value to bytes")
-	}
-	valueUUID, err := uuid.FromBytes(valueBytes)
-	if err != nil {
-		return err
-	}
-	*u = BinUUID(valueUUID)
-	return nil
-}
+func (u *BinUUID) Scan(value interface{}) error { _ = "STUB: not implemented"; return nil }
 
 // Value is the valuer function for this datatype.
 func (u BinUUID) Value() (driver.Value, error) {
-	return uuid.UUID(u).MarshalBinary()
+	_ = "STUB: not implemented"
+	return *new(driver.Value), nil
 }
 
 // String returns the string form of the UUID.
-func (u BinUUID) Bytes() []byte {
-	bytes, err := uuid.UUID(u).MarshalBinary()
-	if err != nil {
-		return nil
-	}
-	return bytes
-}
+func (u BinUUID) Bytes() []byte { _ = "STUB: not implemented"; return nil }
 
 // String returns the string form of the UUID.
-func (u BinUUID) String() string {
-	return uuid.UUID(u).String()
-}
+func (u BinUUID) String() string { _ = "STUB: not implemented"; return "" }
 
 // Equals returns true if bytes form of BinUUID matches other, false otherwise.
-func (u BinUUID) Equals(other BinUUID) bool {
-	return bytes.Equal(u.Bytes(), other.Bytes())
-}
+func (u BinUUID) Equals(other BinUUID) bool { _ = "STUB: not implemented"; return false }
 
 // Length returns the number of characters in string form of UUID.
-func (u BinUUID) LengthBytes() int {
-	return len(u.Bytes())
-}
+func (u BinUUID) LengthBytes() int { _ = "STUB: not implemented"; return 0 }
 
 // Length returns the number of characters in string form of UUID.
-func (u BinUUID) Length() int {
-	return len(u.String())
-}
+func (u BinUUID) Length() int { _ = "STUB: not implemented"; return 0 }
 
 // IsNil returns true if the BinUUID is nil uuid (all zeroes), false otherwise.
-func (u BinUUID) IsNil() bool {
-	return uuid.UUID(u) == uuid.Nil
-}
+func (u BinUUID) IsNil() bool { _ = "STUB: not implemented"; return false }
 
 // IsEmpty returns true if BinUUID is nil uuid or of zero length, false otherwise.
-func (u BinUUID) IsEmpty() bool {
-	return u.IsNil() || u.Length() == 0
-}
+func (u BinUUID) IsEmpty() bool { _ = "STUB: not implemented"; return false }
 
 // IsNilPtr returns true if caller BinUUID ptr is nil, false otherwise.
 func (u *BinUUID) IsNilPtr() bool {
-	return u == nil
+	_ = "STUB: not implemented"
+
+	// IsEmptyPtr returns true if caller BinUUID ptr is nil or it's value is empty.
+	return false
 }
 
-// IsEmptyPtr returns true if caller BinUUID ptr is nil or it's value is empty.
-func (u *BinUUID) IsEmptyPtr() bool {
-	return u.IsNilPtr() || u.IsEmpty()
-}
+func (u *BinUUID) IsEmptyPtr() bool { _ = "STUB: not implemented"; return false }
